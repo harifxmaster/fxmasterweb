@@ -6,38 +6,37 @@ import AccountPreview from "./AccountPreview";
 
 function RegLeftSidePanel() {
     const leftSidePanelList = [
-        { id: "0", name: "Personal", displayName: "Personal Details" },
+        { id: "0", name: "personal", displayName: "Personal Details" },
         {
             id: "1",
-            name: "MobileVerfiy",
+            name: "mobileverfiy",
             displayName: "Mobile OTP Verification",
         },
-        { id: "2", name: "EmailVerfiy", displayName: "Email OTP Verification" },
-        { id: "3", name: "Address", displayName: "Address & DOB" },
-        { id: "4", name: "kycDetails", displayName: "KYC Documents" },
-        { id: "5", name: "Account-Preview", displayName: "Account Preview" },
+        { id: "2", name: "emailverfiy", displayName: "Email OTP Verification" },
+        { id: "3", name: "address", displayName: "Address & DOB" },
+        { id: "4", name: "kycvetails", displayName: "KYC Documents" },
+        { id: "5", name: "account-preview", displayName: "Account Preview" },
     ];
     
     const ShowPanal = useLocation();
     const currentUrl = ShowPanal.pathname.split("/");
     const currentPath = currentUrl[currentUrl.length - 1];
     
-    let obj = leftSidePanelList.find(o => o.name === currentPath);
-    
-    
- 
+    console.log(currentPath);
+    let activeSection = leftSidePanelList.find(obj => obj.name.toLowerCase() === currentPath);
     
     const ShowPanel = (e) => {
         console.log(e);
     };
+
     
+   
     const SideElement = leftSidePanelList.map((item, index) => {
-        
-        
+
         var  ClassessName =   'intro-x flex items-center sm:mt-4 border-slate-200 text-gray-700 block';  
-        ClassessName +=  obj.id >= item.id ?  ( obj.id == item.id ?'' :" complete-step  ") : " hidden ";
+        ClassessName +=  activeSection.id >= item.id ?  ( activeSection.id === item.id ? "" :" complete-step  ") : " hidden ";
         
-        
+        console.log(currentPath === activeSection.name);
         return (
             <div className={ClassessName}  key ={index}>
                 <button className="w-10 h-10 rounded-full btn btn-primary">
@@ -75,8 +74,8 @@ function RegLeftSidePanel() {
                     <div className="px-0 sm:px-0 step-bdr"> {SideElement} </div> 
                 </div>
             </div>
-             {currentPath=='Address' &&  <AddressPanel /> }
-             {currentPath=='Account-Preview' &&  <AccountPreview/> }
+             {currentPath === 'address' &&  <AddressPanel /> }
+             {currentPath === 'account-preview' &&  <AccountPreview/> }
 
             
         </div>
