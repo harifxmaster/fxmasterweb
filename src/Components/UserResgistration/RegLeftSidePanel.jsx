@@ -20,10 +20,10 @@ function RegLeftSidePanel() {
     
     const ShowPanal = useLocation();
     const currentUrl = ShowPanal.pathname.split("/");
-    const currentPath = currentUrl[currentUrl.length - 1];
+    const currentPath = currentUrl[currentUrl.length - 1].toLowerCase();
     
-    console.log(currentPath);
-    let activeSection = leftSidePanelList.find(obj => obj.name.toLowerCase() === currentPath);
+   
+    let activeSection = leftSidePanelList.find( obj => obj.name === currentPath );
     
     const ShowPanel = (e) => {
         console.log(e);
@@ -33,10 +33,12 @@ function RegLeftSidePanel() {
    
     const SideElement = leftSidePanelList.map((item, index) => {
 
-        var  ClassessName =   'intro-x flex items-center sm:mt-4 border-slate-200 text-gray-700 block';  
-        ClassessName +=  activeSection.id >= item.id ?  ( activeSection.id === item.id ? "" :" complete-step  ") : " hidden ";
+        let  ClassessName =   'intro-x flex items-center sm:mt-4 border-slate-200 text-gray-700 block'; 
         
-        console.log(currentPath === activeSection.name);
+       
+        ClassessName += activeSection.id >= item.id ?   (activeSection.id === item.id ?  ""  : " complete-step" ) : " hidden" ;
+        
+        console.log(ClassessName);
         return (
             <div className={ClassessName}  key ={index}>
                 <button className="w-10 h-10 rounded-full btn btn-primary">
